@@ -1,1 +1,13 @@
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/repository/CommentRepository.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/model/Tag.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/model/BlogPost.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/repository/TagRepository.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/model/User.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/model/Comment.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/repository/ProjectRepository.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/model/Project.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/model/GalleryImage.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/repository/UserRepository.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/repository/GalleryImageRepository.java
+/Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/repository/BlogPostRepository.java
 /Users/mac/workspace/portfolio-website/backend/src/main/java/com/portfolio/PortfolioApplication.java
