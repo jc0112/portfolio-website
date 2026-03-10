@@ -6,6 +6,7 @@ import com.portfolio.service.BlogPostService;
 import com.portfolio.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -90,8 +91,8 @@ public class BlogPostController {
     @PostMapping
     public ResponseEntity<BlogPost> createPost(@RequestBody Map<String, Object> payload) {
         try {
-            // TODO: Get authenticated user instead of hardcoding
-            User author = userService.getUserById(1L)
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            User author = userService.getUserByUsername(username)
                     .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
             BlogPost post = new BlogPost();
