@@ -115,6 +115,7 @@ export const commentsApi = {
   getByPostId: (postId: number) => api.get<Comment[]>(`/comments/post/${postId}`),
   create: (postId: number, content: string) =>
     api.post<Comment>('/comments', { postId, content }),
+  delete: (id: number) => api.delete(`/comments/${id}`),
 };
 
 // Tags

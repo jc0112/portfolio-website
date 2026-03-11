@@ -5,6 +5,7 @@ import { authApi } from './services/api';
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
 import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
 import GalleryPage from './pages/GalleryPage';
 import './App.css';
 
@@ -31,7 +32,7 @@ function NavBar() {
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <Link to="/" className="nav-logo">My Portfolio</Link>
+          <Link to="/" className="nav-logo">Jerry Chen</Link>
           <ul className="nav-menu">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/projects">Projects</Link></li>
@@ -90,6 +91,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
             </Routes>
           </main>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { blogApi } from '../services/api';
 import type { BlogPost } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -99,7 +100,7 @@ export default function BlogPage() {
       <div className="posts-list">
         {posts.map((post) => (
           <article key={post.id} className="post-preview">
-            <h2>{post.title}</h2>
+            <h2><Link to={`/blog/${post.slug}`}>{post.title}</Link></h2>
             <p className="excerpt">{post.excerpt}</p>
             <div className="post-meta">
               <span>{new Date(post.createdAt).toLocaleDateString()}</span>
