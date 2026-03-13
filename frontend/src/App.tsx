@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { authApi } from './services/api';
 import HomePage from './pages/HomePage';
@@ -96,7 +97,12 @@ function App() {
             </Routes>
           </main>
           <footer className="footer">
-            <p>&copy; 2026 My Portfolio. Built with React & Spring Boot.</p>
+            <div className="footer-social">
+              <a href="https://github.com/jc0112" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
+              <a href="https://linkedin.com/in/jc2001" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+              <a href="https://instagram.com/realjmouse2001" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
+            </div>
+            <p>&copy; 2026 Jerry Chen</p>
           </footer>
         </div>
       </BrowserRouter>
