@@ -27,7 +27,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hero-image">
-          <img src="http://localhost:8080/uploads/home_pic.jpg" alt="Jerry Chen" />
+          <img src="https://storage.googleapis.com/jerry-portfolio-uploads/uploads/home_pic.jpg" alt="Jerry Chen" />
         </div>
       </section>
 
