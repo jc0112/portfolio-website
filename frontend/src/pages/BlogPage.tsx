@@ -99,21 +99,25 @@ export default function BlogPage() {
 
       <div className="posts-list">
         {posts.map((post) => (
-          <article key={post.id} className="post-preview">
-            <h2><Link to={`/blog/${post.slug}`}>{post.title}</Link></h2>
-            <p className="excerpt">{post.excerpt}</p>
-            <div className="post-meta">
-              <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-              <span>{post.viewCount} views</span>
-              {!post.published && <span className="draft-badge">Draft</span>}
+          <Link key={post.id} to={`/blog/${post.slug}`} className="post-preview">
+            <div className="post-preview-main">
+              <h2>{post.title}</h2>
+              <p className="excerpt">{post.excerpt}</p>
             </div>
-            {isOwner && (
-              <div className="owner-actions">
-                <button className="btn-secondary" onClick={() => openEdit(post)}>Edit</button>
-                <button className="btn-danger" onClick={() => handleDelete(post.id)}>Delete</button>
+            <div className="post-preview-footer">
+              <div className="post-meta">
+                <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+                <span>{post.viewCount} views</span>
+                {!post.published && <span className="draft-badge">Draft</span>}
               </div>
-            )}
-          </article>
+              {isOwner && (
+                <div className="owner-actions" onClick={(e) => e.preventDefault()}>
+                  <button className="btn-secondary" onClick={() => openEdit(post)}>Edit</button>
+                  <button className="btn-danger" onClick={() => handleDelete(post.id)}>Delete</button>
+                </div>
+              )}
+            </div>
+          </Link>
         ))}
       </div>
 

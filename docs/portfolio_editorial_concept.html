@@ -1,0 +1,162 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .pf { font-family: -apple-system, 'Helvetica Neue', sans-serif; background: #F8F8F8; color: #222222; min-height: 700px; border-radius: 12px; overflow: hidden; }
+  .nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
+  .nav-logo { font-size: 13px; font-weight: 500; color: #222; letter-spacing: 0.01em; display: flex; align-items: center; gap: 10px; }
+  .nav-logo-icon { width: 28px; height: 28px; background: #222; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .nav-logo-icon svg { width: 14px; height: 14px; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 13px; color: #7B7B7B; text-decoration: none; cursor: default; transition: color 0.2s; }
+  .nav-links a:hover { color: #222; }
+  .nav-cta { font-size: 13px; font-weight: 500; color: #222; background: #fff; border: 0.5px solid #d0d0d0; border-radius: 20px; padding: 8px 18px; cursor: default; display: flex; align-items: center; gap: 6px; }
+  .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 460px; position: relative; }
+  .hero-left { padding: 32px 40px 40px; display: flex; flex-direction: column; justify-content: space-between; }
+  .hero-meta { display: flex; gap: 32px; }
+  .hero-stat { }
+  .hero-stat-num { font-size: 22px; font-weight: 500; color: #222; }
+  .hero-stat-label { font-size: 11px; color: #7B7B7B; margin-top: 2px; }
+  .hero-title-block { margin-top: 24px; }
+  .hero-title { font-size: 80px; font-weight: 300; line-height: 0.95; color: #222; letter-spacing: -0.03em; }
+  .hero-subtitle { font-size: 14px; color: #7B7B7B; margin-top: 20px; display: flex; align-items: center; gap: 8px; }
+  .hero-subtitle::before { content: '—'; }
+  .side-label { position: absolute; left: 0; top: 50%; transform: translateY(-50%) rotate(-90deg); font-size: 10px; color: #7B7B7B; letter-spacing: 0.14em; text-transform: uppercase; transform-origin: center; white-space: nowrap; margin-left: -26px; }
+  .hero-right { position: relative; background: #e8e4de; overflow: hidden; }
+  .photo-placeholder { width: 100%; height: 100%; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 0; background: linear-gradient(160deg, #d8d4ce 0%, #c8c4bc 100%); }
+  .photo-silhouette { width: 72%; opacity: 0.18; }
+  .photo-label { position: absolute; bottom: 20px; right: 20px; font-size: 11px; color: #7B7B7B; background: rgba(255,255,255,0.7); border-radius: 20px; padding: 5px 12px; backdrop-filter: blur(4px); }
+  .scroll-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #7B7B7B; margin-top: 32px; }
+  .scroll-arrow { width: 20px; height: 20px; border: 0.5px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .divider { height: 0.5px; background: #e0e0e0; margin: 0 40px; }
+  .about { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; padding: 40px 40px; }
+  .about-heading { font-size: 26px; font-weight: 300; color: #222; letter-spacing: -0.02em; line-height: 1.2; }
+  .about-body { font-size: 13px; color: #7B7B7B; line-height: 1.75; }
+  .about-stat-card { background: #fff; border: 0.5px solid #e8e8e8; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+  .about-big-num { font-size: 44px; font-weight: 300; color: #222; letter-spacing: -0.03em; }
+  .about-big-label { font-size: 12px; color: #7B7B7B; line-height: 1.5; margin-top: 8px; }
+  .bullet-list { display: flex; flex-direction: column; gap: 14px; }
+  .bullet-item { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; color: #7B7B7B; line-height: 1.6; }
+  .bullet-dot { width: 20px; height: 20px; background: #222; border-radius: 50%; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; }
+  .bullet-dot svg { width: 8px; height: 8px; }
+  .exp-section { padding: 0 40px 40px; }
+  .exp-header { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .exp-dot { width: 7px; height: 7px; border-radius: 50%; background: #222; }
+  .exp-title { font-size: 13px; font-weight: 500; color: #222; letter-spacing: 0.04em; }
+  .exp-row { display: grid; grid-template-columns: 2fr 2fr 1fr; align-items: center; padding: 16px 0; border-bottom: 0.5px solid #e8e8e8; gap: 20px; }
+  .exp-row:first-child { border-top: 0.5px solid #e8e8e8; }
+  .exp-company { font-size: 14px; font-weight: 500; color: #222; }
+  .exp-date { font-size: 12px; color: #7B7B7B; margin-top: 3px; display: flex; align-items: center; gap: 5px; }
+  .exp-date::before { content: '·'; font-size: 14px; }
+  .exp-role { font-size: 13px; color: #7B7B7B; }
+  .tag-row { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+  .tag { font-size: 11px; color: #222; border: 0.5px solid #ccc; border-radius: 20px; padding: 4px 12px; background: #fff; }
+  .year-label { position: absolute; left: 40px; bottom: 28px; font-size: 10px; color: #aaa; letter-spacing: 0.08em; }
+</style>
+
+<div class="pf">
+  <nav class="nav">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M7 1L13 4v6L7 13 1 10V4L7 1z" stroke="white" stroke-width="1.2"/></svg>
+      </div>
+      Jerry Chen
+    </div>
+    <div class="nav-links">
+      <a>About Me</a>
+      <a>Projects</a>
+      <a>Experience</a>
+      <a>Blog</a>
+    </div>
+    <div class="nav-cta">Get in touch ↗</div>
+  </nav>
+
+  <div class="hero" style="position:relative;">
+    <div style="position:absolute;left:40px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;transform:rotate(-180deg) translateY(50%);font-size:10px;color:#aaa;letter-spacing:0.14em;text-transform:uppercase;pointer-events:none;">Software Engineer</div>
+    <div class="hero-left" style="padding-left:72px;">
+      <div class="hero-meta">
+        <div class="hero-stat">
+          <div class="hero-stat-num">+3</div>
+          <div class="hero-stat-label">Companies worked at</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">+10</div>
+          <div class="hero-stat-label">Projects shipped</div>
+        </div>
+      </div>
+      <div class="hero-title-block">
+        <div class="hero-title">Hello</div>
+        <div class="hero-subtitle">It's Jerry Chen, a software engineer</div>
+      </div>
+      <div class="scroll-row">
+        <div class="scroll-arrow">↓</div>
+        Scroll down
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="photo-placeholder">
+        <svg class="photo-silhouette" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="70" rx="45" ry="52" fill="#222"/>
+          <path d="M20 300 C20 200 180 200 180 300" fill="#222"/>
+        </svg>
+      </div>
+      <div class="photo-label">Your photo here</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="about">
+    <div>
+      <div class="about-heading">About<br>Me</div>
+      <div class="about-body" style="margin-top:16px;">I build reliable backend systems, developer tools, and AI-powered applications. Currently at Nokia, crafting test frameworks and LLM-powered knowledge systems.</div>
+    </div>
+    <div class="about-stat-card">
+      <div>
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="12" stroke="#ccc" stroke-width="1"/><path d="M8 14h12M14 8v12" stroke="#222" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="about-big-num" style="margin-top:12px;">2,000+</div>
+        <div class="about-big-label">Students served by the Duke code assessment platform</div>
+      </div>
+    </div>
+    <div class="bullet-list" style="margin-top:4px;">
+      <div class="bullet-item">
+        <div class="bullet-dot"><svg viewBox="0 0 8 8" fill="none"><path d="M2 4l2 2 3-3" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        MS ECE at Duke University, graduating May 2026. Background in backend, systems, and AI integration.
+      </div>
+      <div class="bullet-item">
+        <div class="bullet-dot"><svg viewBox="0 0 8 8" fill="none"><path d="M2 4l2 2 3-3" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        Experience across Nokia, Amazon Lab126, and Careverse Technology — from radar systems to DICOM pipelines.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="exp-section" style="padding-top:32px;">
+    <div class="exp-header">
+      <div class="exp-dot"></div>
+      <div class="exp-title">Experience</div>
+    </div>
+    <div class="exp-row">
+      <div><div class="exp-company">Nokia</div><div class="exp-date">Jan 2025 – Present</div></div>
+      <div class="exp-role">Sunnyvale · Test framework migration, RAGnarok AI hub</div>
+      <div class="tag-row"><span class="tag">Python</span><span class="tag">LLMs</span></div>
+    </div>
+    <div class="exp-row">
+      <div><div class="exp-company">Amazon Lab126</div><div class="exp-date">Summer 2024</div></div>
+      <div class="exp-role">Radar movement detection systems</div>
+      <div class="tag-row"><span class="tag">Embedded</span><span class="tag">C++</span></div>
+    </div>
+    <div class="exp-row">
+      <div><div class="exp-company">Careverse Technology</div><div class="exp-date">2023</div></div>
+      <div class="exp-role">Medical imaging DICOM pipeline</div>
+      <div class="tag-row"><span class="tag">Go</span><span class="tag">Backend</span></div>
+    </div>
+  </div>
+
+  <div style="height:0.5px;background:#e0e0e0;margin:0 40px;"></div>
+  <div style="padding:16px 40px;display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-size:11px;color:#aaa;letter-spacing:0.06em;">2026</div>
+    <div style="font-size:12px;color:#7B7B7B;">Durham, NC</div>
+    <div style="display:flex;gap:16px;"><span style="font-size:12px;color:#7B7B7B;cursor:default;">GitHub</span><span style="font-size:12px;color:#7B7B7B;cursor:default;">LinkedIn</span><span style="font-size:12px;color:#7B7B7B;cursor:default;">Email</span></div>
+  </div>
+</div>

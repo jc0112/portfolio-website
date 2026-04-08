@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { authApi } from './services/api';
 import HomePage from './pages/HomePage';
@@ -21,7 +20,6 @@ function NavBar() {
     e.preventDefault();
     try {
       const res = await authApi.login(username.trim(), password.trim());
-      // AuthContext.login is called via the token stored in localStorage
       localStorage.setItem('token', res.data.token);
       window.location.reload();
     } catch (err: any) {
@@ -33,19 +31,31 @@ function NavBar() {
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <Link to="/" className="nav-logo">Jerry Chen</Link>
+          <Link to="/" className="nav-logo">
+            <div className="nav-logo-icon">
+              <svg viewBox="0 0 14 14" fill="none">
+                <path d="M7 1L13 4v6L7 13 1 10V4L7 1z" stroke="white" strokeWidth="1.2" />
+              </svg>
+            </div>
+            Jerry Chen
+          </Link>
+
           <ul className="nav-menu">
-            <li><Link to="/">Home</Link></li>
+            <li><Link to="/">About</Link></li>
             <li><Link to="/projects">Projects</Link></li>
             <li><Link to="/blog">Blog</Link></li>
             <li><Link to="/gallery">Gallery</Link></li>
           </ul>
-          <div className="nav-auth">
+
+          <div className="nav-right">
             {isOwner ? (
-              <button className="btn-secondary" onClick={logout}>Logout</button>
+              <button className="btn-nav-login" onClick={logout}>Logout</button>
             ) : (
-              <button className="btn-secondary" onClick={() => setShowLogin(true)}>Owner Login</button>
+              <button className="btn-nav-login" onClick={() => setShowLogin(true)}>Login</button>
             )}
+            <a href="mailto:zhengyichenworks@gmail.com" className="btn-nav-cta">
+              Get in touch ↗
+            </a>
           </div>
         </div>
       </nav>
@@ -81,6 +91,22 @@ function NavBar() {
   );
 }
 
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-inner">
+        <span className="footer-year">2026</span>
+        <span className="footer-loc">Durham, NC</span>
+        <div className="footer-links">
+          <a href="https://github.com/jc0112" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/jc2001" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:zhengyichenworks@gmail.com">Email</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 function App() {
   return (
     <AuthProvider>
@@ -96,14 +122,7 @@ function App() {
               <Route path="/gallery" element={<GalleryPage />} />
             </Routes>
           </main>
-          <footer className="footer">
-            <div className="footer-social">
-              <a href="https://github.com/jc0112" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
-              <a href="https://linkedin.com/in/jc2001" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
-              <a href="https://instagram.com/realjmouse2001" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
-            </div>
-            <p>&copy; 2026 Jerry Chen</p>
-          </footer>
+          <Footer />
         </div>
       </BrowserRouter>
     </AuthProvider>
