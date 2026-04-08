@@ -252,8 +252,9 @@
 /* Hero */
 .hero {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 520px;
+  grid-template-columns: 2fr 1fr;
+  height: calc(100vh - 60px);
+  max-height: 640px;
   position: relative;
 }
 
@@ -349,6 +350,9 @@
   object-position: center top;
   display: block;
 }
+
+
+
 
 /* About */
 .about-section {

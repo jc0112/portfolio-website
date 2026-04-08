@@ -71,7 +71,8 @@ export default function HomePage() {
 
         <div className="hero-right">
           <img
-            src="https://storage.googleapis.com/jerry-portfolio-uploads/uploads/home_pic.jpg"
+            src="https://storage.googleapis.com/jerry-portfolio-uploads/uploads/test-photo.jpeg"
+            // src="/test-photo.jpeg"
             alt="Jerry Chen"
           />
         </div>
