@@ -68,11 +68,11 @@ export default function HomePage() {
             <h1 className="hero-title">Hello</h1>
             <p className="hero-subtitle">It's Jerry Chen, a software engineer</p>
           </div>
+        </div>
 
-          <div className="hero-scroll">
-            <div className="hero-scroll-arrow">↓</div>
-            <span>Scroll down</span>
-          </div>
+        <div className="hero-scroll">
+          <div className="hero-scroll-arrow">↓</div>
+          <span>Scroll down</span>
         </div>
 
         <div className="hero-right">
