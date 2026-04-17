@@ -1,10 +1,35 @@
-# Default ignored files
+# ── IDE ──
+.idea/
+.vscode/
+*.iml
 /shelf/
-/.idea/workspace.xml
-# Editor-based HTTP Client requests
 /httpRequests/
-# Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
 
-.idea/*
+# ── Backend ──
+backend/target/
+backend/uploads/
+backend/*.log
+backend/log/
+
+# ── Frontend ──
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# ── Infrastructure / secrets ──
+key.json
+*.pem
+*.key
+.env
+.env.*
+
+# ── macOS ──
+.DS_Store
+**/.DS_Store
+
+# ── Logs ──
+*.log

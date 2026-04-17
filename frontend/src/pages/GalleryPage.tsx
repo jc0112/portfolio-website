@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { galleryApi, uploadFile } from '../services/api';
 import type { GalleryImage } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -13,6 +13,7 @@ export default function GalleryPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [showUpload, setShowUpload] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState<GalleryImage | null>(null);
 
   const fetchImages = async () => {
     try {
@@ -26,6 +27,14 @@ export default function GalleryPage() {
   };
 
   useEffect(() => { fetchImages(); }, []);
+
+  const closeLightbox = useCallback(() => setLightboxImage(null), []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeLightbox(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [closeLightbox]);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -56,6 +65,7 @@ export default function GalleryPage() {
   const handleDelete = async (id: number) => {
     if (!confirm('Delete this photo?')) return;
     await galleryApi.delete(id);
+    if (lightboxImage?.id === id) closeLightbox();
     fetchImages();
   };
 
@@ -77,16 +87,37 @@ export default function GalleryPage() {
 
       <div className="gallery-grid">
         {images.map((image) => (
-          <div key={image.id} className="gallery-item">
-            <img src={image.imageUrl} alt={image.caption} />
+          <div key={image.id} className="gallery-item" onClick={() => setLightboxImage(image)}>
+            <div className="gallery-img-wrap">
+              <img src={image.imageUrl} alt={image.caption} />
+            </div>
             {image.caption && <p className="caption">{image.caption}</p>}
             {isOwner && (
-              <button className="gallery-delete-btn" onClick={() => handleDelete(image.id)}>✕</button>
+              <button className="gallery-delete-btn" onClick={(e) => { e.stopPropagation(); handleDelete(image.id); }}>✕</button>
             )}
           </div>
         ))}
       </div>
 
+      {/* Lightbox */}
+      {lightboxImage && (
+        <div className="lightbox-overlay" onClick={closeLightbox}>
+          <button className="lightbox-close" onClick={closeLightbox}>✕</button>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img src={lightboxImage.imageUrl} alt={lightboxImage.caption} />
+            {lightboxImage.caption && (
+              <p className="lightbox-caption">{lightboxImage.caption}</p>
+            )}
+            {isOwner && (
+              <button className="btn-danger lightbox-delete" onClick={() => handleDelete(lightboxImage.id)}>
+                Delete Photo
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Upload modal */}
       {showUpload && (
         <div className="modal-overlay" onClick={() => setShowUpload(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
